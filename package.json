@@ -1,6 +1,6 @@
 {
     "scripts":{
-	"build":"parcel build index.html --out-dir docs --public-url https://abulvent.github.io/realworld-mithril"
+	"build":"parcel build index.html --out-dir docs --public-url https://abulvenz.github.io/realworld-mithril"
     },
   "dependencies": {
     "jwt-decode": "^2.2.0",
