@@ -7,7 +7,7 @@ import s from "./settings";
 let username = "";
 let email = "";
 let password = "";
-let token = null;
+let user = null;
 let expMillis = -1;
 
 const refresh = (cb, errcb) => {
@@ -22,8 +22,8 @@ const refresh = (cb, errcb) => {
         url: s.url("/users/login"),
         method: "post"
     }).then(response => {
-        token = response.token;
-        let ttt = jwt_decode(token);
+        user = response.user;
+        let ttt = jwt_decode(user.token);
         expMillis = ttt.exp * 1000;
         if (cb) cb();
         setTimeout(refresh, -Date.now() + expMillis - 100);
@@ -54,11 +54,11 @@ export default {
             method: "post"
         }),
     isLoggedIn: () => {
-        return token !== null;
+        return user !== null;
     },
-    token: () => {
-        return token;
-    },
+    // token: () => {
+    //     return token;
+    // },
     username: () => username,
     setUsername: username_ => { if (!!username_ && username_ !== "") username = username_; },
     setEmail: email_ => {
@@ -70,9 +70,9 @@ export default {
     request: options => {
         options.url = s.url(options.url);
         let headers = options.headers || {};
-        if (token !== null) headers.Authorization = "Bearer " + token;
+        if (user !== null) headers.Authorization = "Token " + user.token;
         options.headers = headers;
-        return m.request({...options });
+        return m.request(options);
     },
     debug: () => {
         return {
