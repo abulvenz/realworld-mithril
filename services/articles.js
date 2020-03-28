@@ -6,8 +6,9 @@ let articlesCount = 0;
 const length = 10;
 
 const list = () => {
-    if (articles.length === 0)
+    if (articles.length === 0) {
         load();
+    }
     return articles;
 };
 
@@ -15,7 +16,7 @@ let params = {};
 
 const load = () =>
     auth.request({
-        url: '/articles',
+        url: params.feed ? '/articles/feed' : '/articles',
         params
     }).then(r => {
         articles = r.articles;
@@ -36,6 +37,10 @@ export default {
     },
     setTag: tag => {
         params.tag = tag;
+        load();
+    },
+    setFeed: feed => {
+        params.feed = feed;
         load();
     },
     bySlug: slug => use(articles.find(article => article.slug === slug), article => {

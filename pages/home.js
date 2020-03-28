@@ -3,8 +3,10 @@ import articleMeta from './article-meta';
 import articles from '../services/articles';
 import articlePreview from './article-preview';
 import sidebar from '../components/sidebar';
+import auth from '../auth';
 
 let activeTag = null;
+let activeFeed = null;
 
 const pagination = vnode => {
     let current = 0;
@@ -52,13 +54,30 @@ export default {
                 m("div", { "class": "col-md-9" }, [
                     m("div", { "class": "feed-toggle" },
                         m("ul", { "class": "nav nav-pills outline-active" }, [
+                            auth.isLoggedIn() ?
                             m("li", { "class": "nav-item" },
-                                m("a", { "class": "nav-link disabled", "href": "" },
+                                m("a", {
+                                        "class": "nav-link disabled",
+                                        "href": "",
+                                        onclick: e => {
+                                            activeFeed = 'feed';
+                                            articles.setFeed('feed');
+                                            e.preventDefault();
+                                        }
+                                    },
                                     "Your Feed"
                                 )
-                            ),
+                            ) : null,
                             m("li", { "class": "nav-item" },
-                                m("a", { "class": "nav-link active", "href": "" },
+                                m("a", {
+                                        "class": "nav-link active",
+                                        "href": "",
+                                        onclick: e => {
+                                            activeFeed = null;
+                                            articles.setFeed(null);
+                                            e.preventDefault();
+                                        }
+                                    },
                                     "Global Feed"
                                 )
                             ),

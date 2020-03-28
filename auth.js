@@ -10,12 +10,14 @@ let password = "";
 let token = null;
 let expMillis = -1;
 
-const refresh = cb => {
+const refresh = (cb, errcb) => {
     if (email === "" || password === "") return;
     m.request({
-        data: {
-            email: email,
-            password: password
+        body: {
+            user: {
+                email: email,
+                password: password
+            }
         },
         url: s.url("/users/login"),
         method: "post"
@@ -25,9 +27,10 @@ const refresh = cb => {
         expMillis = ttt.exp * 1000;
         if (cb) cb();
         setTimeout(refresh, -Date.now() + expMillis - 100);
+    }).catch(err => {
+        errcb && errcb(err.response);
     });
 };
-
 
 export default {
     sessionRunningMillis: () => expMillis,
@@ -71,4 +74,13 @@ export default {
         options.headers = headers;
         return m.request({...options });
     },
+    debug: () => {
+        return {
+            view: vnode =>
+                m('pre', JSON.stringify({
+                    email,
+                    password
+                }))
+        }
+    }
 };

@@ -28,13 +28,29 @@ export default {
                     ),
                     m("form", [
                         m("fieldset", { "class": "form-group" },
-                            m("input", { oninput: e => auth.setUsername(e.target.value), value: auth.username(), "class": "form-control form-control-lg", "type": "text", "placeholder": "Your Name" })
+                            m("input", {
+                                oninput: e => auth.setUsername(e.target.value),
+                                value: auth.username(),
+                                "class": "form-control form-control-lg",
+                                "type": "text",
+                                "placeholder": "Your Name"
+                            })
                         ),
                         m("fieldset", { "class": "form-group" },
-                            m("input", { oninput: e => auth.setEmail(e.target.value), "class": "form-control form-control-lg", "type": "text", "placeholder": "Email" })
+                            m("input", {
+                                oninput: e => auth.setEmail(e.target.value),
+                                "class": "form-control form-control-lg",
+                                "type": "text",
+                                "placeholder": "Email"
+                            })
                         ),
                         m("fieldset", { "class": "form-group" },
-                            m("input", { oninput: e => auth.setPassword(e.target.value), "class": "form-control form-control-lg", "type": "password", "placeholder": "Password" })
+                            m("input", {
+                                oninput: e => auth.setPassword(e.target.value),
+                                "class": "form-control form-control-lg",
+                                "type": "password",
+                                "placeholder": "Password"
+                            })
                         ),
                         m("button", {
                                 onclick: e => auth.signup()
