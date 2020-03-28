@@ -1,0 +1,10 @@
+{
+    "scripts":{
+	"build":"parcel build index.html --out-dir docs --public-url https://abulvent.github.io/realworld-mithril"
+    },
+  "dependencies": {
+    "jwt-decode": "^2.2.0",
+    "marked": "^0.8.2",
+    "mithril": "^2.0.4"
+  }
+}
