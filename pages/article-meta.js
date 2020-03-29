@@ -14,9 +14,15 @@ export default {
                     (new Date(Date.parse(article.updatedAt))).toDateString()
                 )
             ]),
+            m("button", { "class": "btn btn-sm btn-outline-secondary" }, [
+                m("i", { "class": "ion-plus-round" }),
+                " ",
+                m.trust("&nbsp;"),
+                ` Follow ${article.author.username} `,
+            ]),
             m("button", { "class": "btn btn-outline-primary btn-sm pull-xs-right" }, [
                 m("i", { "class": "ion-heart" }),
-                article.favoritesCount
+                ` ${article.favoritesCount}`
             ])
         ]),
         children

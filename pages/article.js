@@ -1,6 +1,7 @@
 import m from 'mithril';
 import marked from 'marked';
 import articles from '../services/articles';
+import articleMeta from './article-meta';
 let article2 = {
     "slug": "how-to-train-your-dragon-2",
     "title": "How to train your dragon 2",
@@ -29,6 +30,7 @@ export default {
                         m("h1",
                             article.title
                         ),
+                        m(articleMeta, { article }),
                         m("div", { "class": "article-meta" }, [
                             m("a", { "href": "" },
                                 m("img", { "src": article.author.image })
@@ -46,9 +48,6 @@ export default {
                                 " ",
                                 m.trust("&nbsp;"),
                                 ` Follow ${article.author.username} `,
-                                m("span", { "class": "counter" },
-                                    "(10)"
-                                )
                             ]),
                             " ",
                             m.trust("&nbsp;"),
